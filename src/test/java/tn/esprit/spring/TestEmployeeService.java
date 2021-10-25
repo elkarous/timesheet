@@ -46,15 +46,15 @@ public class TestEmployeeService {
 	}
 
 
-	@Test 
+	/*@Test 
 	public void mettreAjourEmailByEmployeIdTest() {
-		/*Employe employe=new Employe(50,"wajdi","Ammar","wajdi@gmail.tn","123456",true,Role.ADMINISTRATEUR);
+	Employe employe=new Employe(50,"wajdi","Ammar","wajdi@gmail.tn","123456",true,Role.ADMINISTRATEUR);
 		employeService.addOrUpdateEmploye(employe);
-	employeService.mettreAjourEmailByEmployeId("wajdi@esprit.tn", 50);*/
+	employeService.mettreAjourEmailByEmployeId("wajdi@esprit.tn", 50);
 	employeService.deleteEmployeById(50);
 		
 		
-	}
+	}*/
 
 	
 }
