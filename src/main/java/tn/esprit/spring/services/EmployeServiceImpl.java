@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import tn.esprit.spring.controller.ControllerEmployeImpl;
 import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Employe;
@@ -30,23 +32,34 @@ public class EmployeServiceImpl implements IEmployeService {
 	ContratRepository contratRepoistory;
 	@Autowired
 	TimesheetRepository timesheetRepository;
-
+	private static final Logger logger = Logger.getLogger(ControllerEmployeImpl.class);
 	@Override
 	public Employe authenticate(String login, String password) {
+		logger.debug("debut de la méthode authenticate");
 		return employeRepository.getEmployeByEmailAndPassword(login, password);
+		
 	}
 
 	@Override
 	public int addOrUpdateEmploye(Employe employe) {
+		logger.debug("debut de la méthode addOrUpdateEmploye");
+		try {
 		employeRepository.save(employe);
+		}catch(Exception e ) {
+			logger.error("probléme d'ajout ");
+		}
+		logger.info(employe);
 		return employe.getId();
 	}
 
 
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
+		logger.debug("debut de la méthodeUpdate");
+		
 		Employe employe = employeRepository.findById(employeId).get();
 		employe.setEmail(email);
 		employeRepository.save(employe);
+		logger.info("l'employé "+employe.getNom()+"a changé son email à"+email );
 
 	}
 
@@ -54,7 +67,7 @@ public class EmployeServiceImpl implements IEmployeService {
 	public void affecterEmployeADepartement(int employeId, int depId) {
 		Departement depManagedEntity = deptRepoistory.findById(depId).get();
 		Employe employeManagedEntity = employeRepository.findById(employeId).get();
-
+logger.info("gfguihio");
 		if(depManagedEntity.getEmployes() == null){
 
 			List<Employe> employes = new ArrayList<>();
