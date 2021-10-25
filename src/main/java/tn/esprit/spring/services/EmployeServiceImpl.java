@@ -154,25 +154,66 @@ logger.info("gfguihio");
 		employeRepository.mettreAjourEmailByEmployeIdJPQL(email, employeId);
 
 	}
-	public void deleteAllContratJPQL() {
-		employeRepository.deleteAllContratJPQL();
-	}
 
-	public float getSalaireByEmployeIdJPQL(int employeId) {
-		return employeRepository.getSalaireByEmployeIdJPQL(employeId);
-	}
+	
+//////////////////////////////////////////////////////////khedmett seiff//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public void deleteAllContratJPQL() {
+logger.debug("lancement  de la methode deleteAllContratJPQL ");
+try {
+employeRepository.deleteAllContratJPQL();
+logger.info("suprimé avec succes");
+}
+catch (Exception e) {
+logger.error("il y a un probleme"+e);
 
-	public Double getSalaireMoyenByDepartementId(int departementId) {
-		return employeRepository.getSalaireMoyenByDepartementId(departementId);
-	}
+}
 
-	public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, Date dateDebut,
-			Date dateFin) {
-		return timesheetRepository.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin);
-	}
+}
 
-	public List<Employe> getAllEmployes() {
-		return (List<Employe>) employeRepository.findAll();
-	}
+
+
+
+
+public float getSalaireByEmployeIdJPQL(int employeId) {
+logger.debug("lancement  de la methode getSalaireByEmployeIdJPQL ");
+float varia=employeRepository.getSalaireByEmployeIdJPQL(employeId);
+logger.info("le salire est : "+varia);
+return varia;
+}
+
+
+
+
+public Double getSalaireMoyenByDepartementId(int departementId) {
+logger.debug("lancement  de la methode getSalaireMoyenByDepartementId ");
+Double variable= employeRepository.getSalaireMoyenByDepartementId(departementId);
+logger.info("le salire est : "+variable);
+return variable ;
+}
+
+
+
+
+
+public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, Date dateDebut,Date dateFin) {
+logger.debug("lancement  de la methode getTimesheetsByMissionAndDate ");
+
+List<Timesheet> timesheets= timesheetRepository.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin);
+
+logger.info("les donnés sont : "+timesheets);
+return  timesheets;
+
+}
+
+
+public List<Employe> getAllEmployes() {
+
+logger.debug("lancement  de la methode get employé ");
+List<Employe> employes= (List<Employe>) employeRepository.findAll();
+logger.info("les employer sont : "+ employes);
+return employes;
+}
+
 
 }
