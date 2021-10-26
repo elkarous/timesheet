@@ -70,10 +70,9 @@ public class TestEmployeeService {
 		 employeServiceImpl.getAllEmployes();
 	}
 	
-	
-	
-	
-	
+
+	/*
+
 	@Test
 	public   void  testgetSalaireMoyenByDepartementId() {
 		 employeServiceImpl.getSalaireMoyenByDepartementId(5);
@@ -85,7 +84,18 @@ public class TestEmployeeService {
 		Mission mission = new Mission("Mission kaloun " , "kililin");
 		  Date  dateTime = new Date( "08/07/2019" );
 		 employeServiceImpl.getTimesheetsByMissionAndDate(employe, mission , dateTime, dateTime);
+
 	}
+
+	}*/
+	
+	
+	@Test
+	public   void  testgetSalaireMoyenByDepartementId() {
+		 employeServiceImpl.getSalaireMoyenByDepartementId(5);
+	}
+	/*
+
 	@Test
 	public   void  testgetSalaireByEmployeIdJPQL() {
 		 employeServiceImpl.getSalaireByEmployeIdJPQL(10);
