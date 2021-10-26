@@ -79,7 +79,7 @@ public class TestEmployeeService {
 		 employeServiceImpl.getTimesheetsByMissionAndDate(employe, mission , dateTime, dateTime);
 	}
 	
-	
+/*	
 	@Test
 	public   void  testgetSalaireMoyenByDepartementId() {
 		 employeServiceImpl.getSalaireMoyenByDepartementId(5);
@@ -89,7 +89,7 @@ public class TestEmployeeService {
 	@Test
 	public   void  testgetSalaireByEmployeIdJPQL() {
 		 employeServiceImpl.getSalaireByEmployeIdJPQL(10);
-	}
+	}*/
 	
 	@Test
 	public   void  testdeleteAllContratJPQL() {
