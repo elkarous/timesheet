@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,21 +31,43 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	TimesheetRepository timesheetRepository;
 	@Autowired
 	EmployeRepository employeRepository;
+	private static final Logger logger = Logger.getLogger(TimesheetServiceImpl.class);
+	
 	
 	public int ajouterMission(Mission mission) {
+		try {
+		logger.debug("lancement  d'ajout d'une mission ");
 		missionRepository.save(mission);
+		logger.info("ajout terminé avec succée !!!");
+
+	}catch (Exception e){
+		logger.error("Erreur dans la méthode  ajouterMission(): "+ e);
+	}finally {
+		logger.info("Méthode ajouterMission() términé !!!!");
+	}
+
+		
 		return mission.getId();
 	}
     
 	public void affecterMissionADepartement(int missionId, int depId) {
+		try {
+			logger.debug("lancement  d'ajout d'une mission ");
 		Mission mission = missionRepository.findById(missionId).get();
 		Departement dep = deptRepoistory.findById(depId).get();
 		mission.setDepartement(dep);
 		missionRepository.save(mission);
+		logger.info("ajout terminé avec succée !!!");}
+		catch (Exception e){
+			logger.error("Erreur dans la méthode  ajouterMission(): "+ e);
+		}finally {
+			logger.info("Méthode ajouterMission() términé !!!!");
+		}
 		
 	}
 
 	public void ajouterTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin) {
+		
 		TimesheetPK timesheetPK = new TimesheetPK();
 		timesheetPK.setDateDebut(dateDebut);
 		timesheetPK.setDateFin(dateFin);
@@ -54,18 +77,26 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		Timesheet timesheet = new Timesheet();
 		timesheet.setTimesheetPK(timesheetPK);
 		timesheet.setValide(false); //par defaut non valide
+		try {
+			logger.debug("lancement  d'ajout d'une mission ");
 		timesheetRepository.save(timesheet);
+		logger.info("ajout terminé avec succée !!!");}
+		catch (Exception e){
+			logger.error("Erreur dans la méthode  ajouterMission(): "+ e);
+		}finally {
+			logger.info("Méthode ajouterMission() términé !!!!");
+		}
 		
 	}
 
 	
 	public void validerTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin, int validateurId) {
-		System.out.println("In valider Timesheet");
+		
 		Employe validateur = employeRepository.findById(validateurId).get();
 		Mission mission = missionRepository.findById(missionId).get();
 		//verifier s'il est un chef de departement (interet des enum)
 		if(!validateur.getRole().equals(Role.CHEF_DEPARTEMENT)){
-			System.out.println("l'employe doit etre chef de departement pour valider une feuille de temps !");
+			logger.info("l'employe doit etre chef de departement pour valider une feuille de temps !");
 			return;
 		}
 		//verifier s'il est le chef de departement de la mission en question
@@ -77,7 +108,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 			}
 		}
 		if(!chefDeLaMission){
-			System.out.println("l'employe doit etre chef de departement de la mission en question");
+			logger.info("l'employe doit etre chef de departement de la mission en question");
 			return;
 		}
 //
@@ -87,18 +118,33 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		
 		//Comment Lire une date de la base de données
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		System.out.println("dateDebut : " + dateFormat.format(timesheet.getTimesheetPK().getDateDebut()));
+		logger.info("dateDebut : " + dateFormat.format(timesheet.getTimesheetPK().getDateDebut()));
 		
 	}
 
 	
 	public List<Mission> findAllMissionByEmployeJPQL(int employeId) {
-		return timesheetRepository.findAllMissionByEmployeJPQL(employeId);
+		List<Mission> missions=null;
+		try {
+			logger.debug("lancement  d'ajout d'une mission ");
+		missions= timesheetRepository.findAllMissionByEmployeJPQL(employeId);
+		logger.info("ajout terminé avec succée !!!");}
+		catch (Exception e){
+			logger.error("Erreur dans la méthode  ajouterMission(): "+ e);
+		}
+		return missions;
 	}
 
 	
 	public List<Employe> getAllEmployeByMission(int missionId) {
-		return timesheetRepository.getAllEmployeByMission(missionId);
+		List<Employe> employes=null;
+		try {
+			logger.debug("lancement  d'ajout d'une mission ");
+		employes= timesheetRepository.getAllEmployeByMission(missionId);
+		logger.info("ajout terminé avec succée !!!");}
+		catch (Exception e){
+			logger.error("Erreur dans la méthode  ajouterMission(): "+ e);
+		}
+		return employes;
 	}
-
 }
