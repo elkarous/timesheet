@@ -36,14 +36,14 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	
 	public int ajouterMission(Mission mission) {
 		try {
-		logger.debug("lancement  d'ajout d'une mission ");
+		logger.debug("lancement de l'ajout  d'une mission!!! ");
 		missionRepository.save(mission);
-		logger.info("ajout terminé avec succée !!!");
+		logger.info("l'ajout est terminé avec succés!!! ");
 
 	}catch (Exception e){
-		logger.error("Erreur dans la méthode  ajouterMission(): "+ e);
+		logger.error("Erreur dans la methode ajouterMission():"+ e);
 	}finally {
-		logger.info("Méthode ajouterMission() términé !!!!");
+		logger.info("Methode ajouterMission() est terminée");
 	}
 
 		
@@ -52,14 +52,14 @@ public class TimesheetServiceImpl implements ITimesheetService {
     
 	public void affecterMissionADepartement(int missionId, int depId) {
 		try {
-			logger.debug("lancement  d'ajout d'une mission ");
+			logger.debug("lancement de l'affectation d'une mission");
 		Mission mission = missionRepository.findById(missionId).get();
 		Departement dep = deptRepoistory.findById(depId).get();
 		mission.setDepartement(dep);
 		missionRepository.save(mission);
-		logger.info("ajout terminé avec succée !!!");}
+		logger.info("affectation d'une mission terminé avec succés");}
 		catch (Exception e){
-			logger.error("Erreur dans la méthode  ajouterMission(): "+ e);
+			logger.error("Erreur dans la méthode affecterMissisionADepartement():"+ e);
 		}finally {
 			logger.info("Méthode ajouterMission() términé !!!!");
 		}
@@ -78,11 +78,11 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		timesheet.setTimesheetPK(timesheetPK);
 		timesheet.setValide(false); //par defaut non valide
 		try {
-			logger.debug("lancement  d'ajout d'une mission ");
+			logger.debug("lancement de l'ajout de Timesheet");
 		timesheetRepository.save(timesheet);
-		logger.info("ajout terminé avec succée !!!");}
+		logger.info("ajout terminé avec succés");}
 		catch (Exception e){
-			logger.error("Erreur dans la méthode  ajouterMission(): "+ e);
+			logger.error("Erreur dans la methode ajouterTimesheet():"+ e);
 		}finally {
 			logger.info("Méthode ajouterMission() términé !!!!");
 		}
@@ -126,11 +126,11 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	public List<Mission> findAllMissionByEmployeJPQL(int employeId) {
 		List<Mission> missions=null;
 		try {
-			logger.debug("lancement  d'ajout d'une mission ");
+			logger.debug("lancement  de l'affichage de la liste des missions avec les employes ");
 		missions= timesheetRepository.findAllMissionByEmployeJPQL(employeId);
-		logger.info("ajout terminé avec succée !!!");}
+		logger.info("liste des missons avec les employes !!!");}
 		catch (Exception e){
-			logger.error("Erreur dans la méthode  ajouterMission(): "+ e);
+			logger.error("Erreur dans la méthode  findAllMissionByEmployeJPQL(): "+ e);
 		}
 		return missions;
 	}
@@ -139,11 +139,11 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	public List<Employe> getAllEmployeByMission(int missionId) {
 		List<Employe> employes=null;
 		try {
-			logger.debug("lancement  d'ajout d'une mission ");
+			logger.debug("lancement de l'affichage de la liste des employes avec missions");
 		employes= timesheetRepository.getAllEmployeByMission(missionId);
-		logger.info("ajout terminé avec succée !!!");}
+		logger.info("liste des employes avec leurs missions !!!");}
 		catch (Exception e){
-			logger.error("Erreur dans la méthode  ajouterMission(): "+ e);
+			logger.error("Erreur dans la méthode  getAllEmployeByMission(): "+ e);
 		}
 		return employes;
 	}
