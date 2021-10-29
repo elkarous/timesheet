@@ -76,7 +76,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		
 		Timesheet timesheet = new Timesheet();
 		timesheet.setTimesheetPK(timesheetPK);
-		timesheet.setValide(false); //par defaut non valide
+		timesheet.setValide(false); 
 		try {
 			logger.debug("lancement de l'ajout de Timesheet");
 		timesheetRepository.save(timesheet);
@@ -94,6 +94,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		
 		Employe validateur = employeRepository.findById(validateurId).get();
 		Mission mission = missionRepository.findById(missionId).get();
+		
 		//verifier s'il est un chef de departement (interet des enum)
 		if(!validateur.getRole().equals(Role.CHEF_DEPARTEMENT)){
 			logger.info("l'employe doit etre chef de departement pour valider une feuille de temps !");
