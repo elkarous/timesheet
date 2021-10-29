@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Employe implements Serializable {
 	
-	private static final long serialVersionUID = -1396669830860400871L;
+	private static final long serialVersionUID = 3152690779535828408L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -58,12 +58,11 @@ public class Employe implements Serializable {
 	@OneToMany(mappedBy="employe")
 	private List<Timesheet> timesheets;
 	
-	
+
 	public Employe() {
 		super();
 	}
-	
-		
+
 	public Employe(int id, String prenom, String nom, String email, String password, boolean actif, Role role) {
 		super();
 		this.id = id;
@@ -75,18 +74,6 @@ public class Employe implements Serializable {
 		this.role = role;
 	}
 
-
-
-	public Employe(String nom, String prenom, String email, String password, boolean actif, Role role) {
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.password = password;
-		this.actif = actif;
-		this.role = role;
-	}
-	
-	
 	public int getId() {
 		return id;
 	}
@@ -114,31 +101,26 @@ public class Employe implements Serializable {
 	public String getEmail() {
 		return email;
 	}
-	 
-	public String getPassword() {
-		return password;
-	}
- 
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	public String getPassword() {
+		return password;
+	}
 
-
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public boolean isActif() {
 		return actif;
 	}
 
-
 	public void setActif(boolean actif) {
 		this.actif = actif;
 	}
-
 
 	public Role getRole() {
 		return role;
@@ -152,8 +134,8 @@ public class Employe implements Serializable {
 		return departements;
 	}
 
-	public void setDepartements(List<Departement> departement) {
-		this.departements = departement;
+	public void setDepartements(List<Departement> departements) {
+		this.departements = departements;
 	}
 
 	public Contrat getContrat() {
@@ -172,11 +154,11 @@ public class Employe implements Serializable {
 		this.timesheets = timesheets;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Employe [id=" + id + ", prenom=" + prenom + ", nom=" + nom + ", email=" + email + ", password="
-				+ password + ", actif=" + actif + ", role=" + role + "]";
+				+ password + ", actif=" + actif + ", role=" + role + ", departements=" + departements + ", contrat="
+				+ contrat + ", timesheets=" + timesheets + "]";
 	}
 	
 	
