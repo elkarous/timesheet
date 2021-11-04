@@ -2,6 +2,7 @@ package tn.esprit.spring.controller;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import tn.esprit.spring.DTO.DepartementDto;
+import tn.esprit.spring.DTO.EntrepriseDto;
 
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Entreprise;
@@ -34,8 +38,10 @@ public class RestControlEntreprise {
 
 	@PostMapping("/ajouterEntreprise")
 	@ResponseBody
-	public int ajouterEntreprise(@RequestBody Entreprise ssiiConsulting) {
-		ientrepriseservice.ajouterEntreprise(ssiiConsulting);
+	public int ajouterEntreprise(@RequestBody EntrepriseDto ssiiConsulting) {
+		 ModelMapper modelMapper = new ModelMapper();
+		 Entreprise entreprise = modelMapper.map(ssiiConsulting, Entreprise.class);
+		ientrepriseservice.ajouterEntreprise(entreprise);
 		return ssiiConsulting.getId();
 	}
 	
@@ -66,8 +72,10 @@ public class RestControlEntreprise {
 
  	@PostMapping("/ajouterDepartement")
  	@ResponseBody
-	public int ajouterDepartement(@RequestBody Departement dep) {
-		return ientrepriseservice.ajouterDepartement(dep);
+	public int ajouterDepartement(@RequestBody DepartementDto dep) {
+ 		 ModelMapper modelMapper = new ModelMapper();
+ 		Departement departement = modelMapper.map(dep, Departement.class);
+		return ientrepriseservice.ajouterDepartement(departement);
 	}
 	
  	 // http://localhost:8081/SpringMVC/servlet/getAllDepartementsNamesByEntreprise/1

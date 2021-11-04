@@ -1,38 +1,32 @@
-package tn.esprit.spring.entities;
+package tn.esprit.spring.DTO;
 
-import java.io.Serializable;
+
+
+
 import java.util.List;
-
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.Pattern;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import tn.esprit.spring.entities.Contrat;
+import tn.esprit.spring.entities.Departement;
+import tn.esprit.spring.entities.Role;
+import tn.esprit.spring.entities.Timesheet;
 
 
-@Entity
-public class Employe implements Serializable {
+public class EmployeDto {
 	
-	private static final long serialVersionUID = -1396669830860400871L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
 	private String prenom;
 	
 	private String nom;
 	
-	//@Column(unique=true)
-	//@Pattern(regex=".+\@.+\..+")
+	
 	private String email;
 
 	private String password;
@@ -40,80 +34,24 @@ public class Employe implements Serializable {
 	private boolean actif;
 	
 	@Enumerated(EnumType.STRING)
-	//@NotNull
 	private Role role;
 	
-	//@JsonBackReference  
+	
 	@JsonIgnore
 	@ManyToMany(mappedBy="employes",fetch=FetchType.EAGER )
-	//@NotNull
 	private List<Departement> departements;
 	
 	@JsonIgnore
-	//@JsonBackReference
 	@OneToOne(mappedBy="employe")
 	private Contrat contrat;
 	
 	@JsonIgnore
-	//@JsonBackReference
 	@OneToMany(mappedBy="employe")
 	private List<Timesheet> timesheets;
-	
-	
-	public Employe() {
-		super();
-	}
-	
-		
-	public Employe(int id, String prenom, String nom, String email, String password, boolean actif, Role role) {
-		super();
-		this.id = id;
-		this.prenom = prenom;
-		this.nom = nom;
-		this.email = email;
-		this.password = password;
-		this.actif = actif;
-		this.role = role;
-	}
 
 
 
-	public Employe(String nom, String prenom, String email, String password, boolean actif, Role role) {
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.password = password;
-		this.actif = actif;
-		this.role = role;
-	}
-	
-<<<<<<< Updated upstream
-	public Employe(String nom, String prenom, String email, boolean actif, Role role) {
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.actif = actif;
-		this.role = role;
-	}
-	
-=======
 
-
-
-	public Employe(int id, String prenom, String nom, String email, String password, boolean actif, Role role) {
-		super();
-		this.id = id;
-		this.prenom = prenom;
-		this.nom = nom;
-		this.email = email;
-		this.password = password;
-		this.actif = actif;
-		this.role = role;
-	}
-
-
-
->>>>>>> Stashed changes
 	public int getId() {
 		return id;
 	}
