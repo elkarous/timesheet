@@ -31,9 +31,10 @@ public class ControllerEntrepriseImpl{
 	public void deleteEntrepriseById(int entrepriseId)
 	{
 		ientrepriseservice.deleteEntrepriseById(entrepriseId);
-	}
+
 
 	public Entreprise getEntrepriseById(int entrepriseId) {
+
 
 
 		return ientrepriseservice.getEntrepriseById(1);

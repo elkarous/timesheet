@@ -87,7 +87,7 @@ public class Employe implements Serializable {
 		this.role = role;
 	}
 	
-<<<<<<< Updated upstream
+
 	public Employe(String nom, String prenom, String email, boolean actif, Role role) {
 		this.nom = nom;
 		this.prenom = prenom;
@@ -96,7 +96,7 @@ public class Employe implements Serializable {
 		this.role = role;
 	}
 	
-=======
+
 
 
 
@@ -113,7 +113,7 @@ public class Employe implements Serializable {
 
 
 
->>>>>>> Stashed changes
+
 	public int getId() {
 		return id;
 	}

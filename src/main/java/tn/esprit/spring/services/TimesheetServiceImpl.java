@@ -38,10 +38,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	}
     
 	public void affecterMissionADepartement(int missionId, int depId) {
-<<<<<<< Updated upstream
-		Mission mission = missionRepository.findById(missionId).get();
-		Departement dep = deptRepoistory.findById(depId).get();
-=======
+
 		try {
 			logger.debug("lancement de l'affectation d'une mission");
 		
@@ -55,9 +52,16 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		Optional<Mission> missiontOP=missionRepository.findById(missionId);
 		if(missiontOP.isPresent()) {
 			mission = missiontOP.get();
-		
->>>>>>> Stashed changes
+
 		mission.setDepartement(dep);
+		}
+		missionRepository.save(mission);
+		logger.info("affectation d'une mission terminé avec succés");}
+		catch (Exception e){
+			logger.error("Erreur dans la méthode affecterMissisionADepartement():"+ e);
+		}finally {
+			logger.info("Méthode ajouterMission() términé !!!!");
+
 		}
 		missionRepository.save(mission);
 		
@@ -79,11 +83,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 
 	
 	public void validerTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin, int validateurId) {
-<<<<<<< Updated upstream
-		System.out.println("In valider Timesheet");
-		Employe validateur = employeRepository.findById(validateurId).get();
-		Mission mission = missionRepository.findById(missionId).get();
-=======
+
 		Employe validateur = null;
 		Optional<Employe> employeOP=employeRepository.findById(validateurId);
 		if(employeOP.isPresent()) {
@@ -91,7 +91,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		
 		
 		
->>>>>>> Stashed changes
+
 		//verifier s'il est un chef de departement (interet des enum)
 		if(!validateur.getRole().equals(Role.CHEF_DEPARTEMENT)){
 			System.out.println("l'employe doit etre chef de departement pour valider une feuille de temps !");

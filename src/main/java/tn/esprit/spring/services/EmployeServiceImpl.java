@@ -45,11 +45,7 @@ public class EmployeServiceImpl implements IEmployeService {
 
 
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
-<<<<<<< Updated upstream
-		Employe employe = employeRepository.findById(employeId).get();
-		employe.setEmail(email);
-		employeRepository.save(employe);
-=======
+
 		logger.debug("debut de la méthodeUpdate");
 		Employe employe = null;
 		Optional<Employe> employeOP=employeRepository.findById(employeId);
@@ -61,16 +57,13 @@ public class EmployeServiceImpl implements IEmployeService {
 		logger.info("l'employé "+employe.getNom()+"a changé son email à"+email );
 		}
 		
->>>>>>> Stashed changes
+
 
 	}
 
 	@Transactional	
 	public void affecterEmployeADepartement(int employeId, int depId) {
-<<<<<<< Updated upstream
-		Departement depManagedEntity = deptRepoistory.findById(depId).get();
-		Employe employeManagedEntity = employeRepository.findById(employeId).get();
-=======
+
 		
 		Employe employeManagedEntity = null;
 		Optional<Employe> employeOP=employeRepository.findById(employeId);
@@ -82,7 +75,6 @@ Departement depManagedEntity = null;
 Optional<Departement> departementOP=deptRepoistory.findById(depId);
 if(departementOP.isPresent()) {
 	depManagedEntity = departementOP.get();
->>>>>>> Stashed changes
 
 		if(depManagedEntity.getEmployes() == null){
 
