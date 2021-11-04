@@ -26,17 +26,17 @@ public class ContratServiceImpl implements IContratService {
 
 
 	public List<Contrat> getAllContrats() {
-		l.info("In getAllContrats() : ");
+		l.info("Getting All Contrats");
 		List<Contrat> list=null;
 	try {
 		
 	
 		list=(List<Contrat>) contratRepository.findAll();
-		l.info("la list de contrats est"+list);
+		l.info("Successefilly fetched "+list.size()+ " Contrats");
 	}catch(Exception e) {
-		l.error("il y a erreur"+e);
+		l.error("unable to get Contracts"+e);
 	}
-		l.info("Out getAllContrats() ");
+		l.info("Sending response ");
 		return list ;
 	}
 
@@ -47,7 +47,7 @@ public class ContratServiceImpl implements IContratService {
 		try{
 			contratRepository.save(contrat);
 			l.info("Contrat ajouter avec ref = "+contrat.getReference());
-			l.debug("Out ajouterContrat");
+			l.debug("Contrat Saved Successefilly"+contrat);
 			return contrat.getReference();
 		} catch (Exception e) {
 			l.error("erreur dans la methode ajouterContrat :"+e);
@@ -65,7 +65,7 @@ public class ContratServiceImpl implements IContratService {
 		try {
 			
 				contratRepository.deleteById(contratId);
-		
+		return (contratId);
 				
 			
 
@@ -79,9 +79,9 @@ public class ContratServiceImpl implements IContratService {
 
 
 	@Override
-	public void deleteAllContratJPQL() {
+	public void deleteAllContrat() {
 		l.debug("In deleteAllContratJPQL ");
-		employeRepository.deleteAllContratJPQL();
+		contratRepository.deleteAll();
 		l.info("Liste de contrats a été supprimer");
 		
 	}
