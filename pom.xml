@@ -130,7 +130,6 @@
 			<version>1.16.16</version>
 		</dependency>
 		<!-- JSF -->
-
 	</dependencies>
 	<build>
 		<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>

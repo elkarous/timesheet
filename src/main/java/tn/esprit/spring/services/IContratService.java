@@ -11,7 +11,7 @@ public interface IContratService {
 	public Integer ajouterContrat(Contrat contrat);
 	
 	public int deleteContratById(int contratId);
-	public void deleteAllContratJPQL();
+	void deleteAllContrat();
 	
 
 	
