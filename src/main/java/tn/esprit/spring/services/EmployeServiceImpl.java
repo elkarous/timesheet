@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import tn.esprit.spring.controller.ControllerEmployeImpl;
 import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Employe;
@@ -32,20 +33,28 @@ public class EmployeServiceImpl implements IEmployeService {
 	ContratRepository contratRepoistory;
 	@Autowired
 	TimesheetRepository timesheetRepository;
+	private static final Logger logger = Logger.getLogger(ControllerEmployeImpl.class);
 
 	private static final Logger logger = Logger.getLogger(EntrepriseServiceImpl.class);
 	
 	@Override
 	public Employe authenticate(String login, String password) {
+		logger.debug("debut de la méthode authenticate");
 		return employeRepository.getEmployeByEmailAndPassword(login, password);
+
 	}
 
 	@Override
 	public int addOrUpdateEmploye(Employe employe) {
-		employeRepository.save(employe);
+		logger.debug("debut de la méthode addOrUpdateEmploye");
+		try {
+			employeRepository.save(employe);
+		} catch (Exception e) {
+			logger.error("probléme d'ajout ");
+		}
+		logger.info(employe);
 		return employe.getId();
 	}
-
 
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
 
@@ -61,10 +70,18 @@ public class EmployeServiceImpl implements IEmployeService {
 		}
 		
 
+		logger.debug("debut de la méthodeUpdate");
 
+
+		Optional<Employe> employe = employeRepository.findById(employeId);
+		if (employe.isPresent()) {
+			employe.get().setEmail(email);
+			employeRepository.save(employe.get());
+			logger.info("l'employé " + employe.get().getNom() + "a changé son email à" + email);
+		}
 	}
 
-	@Transactional	
+	@Transactional
 	public void affecterEmployeADepartement(int employeId, int depId) {
 
 		
@@ -81,19 +98,24 @@ if(departementOP.isPresent()) {
 
 		if(depManagedEntity.getEmployes() == null){
 
-			List<Employe> employes = new ArrayList<>();
-			employes.add(employeManagedEntity);
-			depManagedEntity.setEmployes(employes);
-		}else{
 
-			depManagedEntity.getEmployes().add(employeManagedEntity);
+			List<Employe> employes = new ArrayList<>();
+			employes.add(employeManagedEntity.get());
+			depManagedEntity.get().setEmployes(employes);
+		} else {
+
+			depManagedEntity.get().getEmployes().add(employeManagedEntity.get());
 		}
 }
 		// à ajouter? 
 		deptRepoistory.save(depManagedEntity); 
 
+
+
 	}
+
 	@Transactional
+
 	public void desaffecterEmployeDuDepartement(int employeId, int depId)
 	{
 		Departement dep = null;
@@ -120,6 +142,7 @@ if(departementOP.isPresent()) {
 	}
 
 	public void affecterContratAEmploye(int contratId, int employeId) {
+
 		
 		Employe employeManagedEntity = null;
 		Optional<Employe> employeOP=employeRepository.findById(employeId);
@@ -134,9 +157,11 @@ if(departementOP.isPresent()) {
 		}
 		contratRepoistory.save(contratManagedEntity);
 
+
 	}
 
 	public String getEmployePrenomById(int employeId) {
+
 		Employe employeManagedEntity = null;
 		String nom=null;
 		try {
@@ -195,25 +220,51 @@ if(departementOP.isPresent()) {
 		employeRepository.mettreAjourEmailByEmployeIdJPQL(email, employeId);
 
 	}
+
 	public void deleteAllContratJPQL() {
-		employeRepository.deleteAllContratJPQL();
+		logger.debug("lancement  de la methode deleteAllContratJPQL ");
+		try {
+			employeRepository.deleteAllContratJPQL();
+			logger.info("suprimé avec succes");
+		} catch (Exception e) {
+			logger.error("il y a un probleme" + e);
+
+		}
+
 	}
 
 	public float getSalaireByEmployeIdJPQL(int employeId) {
-		return employeRepository.getSalaireByEmployeIdJPQL(employeId);
+		logger.debug("lancement  de la methode getSalaireByEmployeIdJPQL ");
+		float varia = employeRepository.getSalaireByEmployeIdJPQL(employeId);
+		logger.info("le salire est : " + varia);
+		return varia;
 	}
 
 	public Double getSalaireMoyenByDepartementId(int departementId) {
-		return employeRepository.getSalaireMoyenByDepartementId(departementId);
+		logger.debug("lancement  de la methode getSalaireMoyenByDepartementId ");
+		Double variable = employeRepository.getSalaireMoyenByDepartementId(departementId);
+		logger.info("le salire est : " + variable);
+		return variable;
 	}
 
 	public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, Date dateDebut,
 			Date dateFin) {
-		return timesheetRepository.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin);
+		logger.debug("lancement  de la methode getTimesheetsByMissionAndDate ");
+
+		List<Timesheet> timesheets = timesheetRepository.getTimesheetsByMissionAndDate(employe, mission, dateDebut,
+				dateFin);
+
+		logger.info("les donnés sont : " + timesheets);
+		return timesheets;
+
 	}
 
 	public List<Employe> getAllEmployes() {
-		return (List<Employe>) employeRepository.findAll();
+
+		logger.debug("lancement  de la methode get employé ");
+		List<Employe> employes = employeRepository.findAll();
+		logger.info("les employer sont : " + employes);
+		return employes;
 	}
 
 }

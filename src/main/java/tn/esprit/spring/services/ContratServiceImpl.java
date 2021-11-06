@@ -25,15 +25,68 @@ public class ContratServiceImpl implements IContratService {
 
 
 	public List<Contrat> getAllContrats() {
-		l.info("In getAllContrats() : ");
+
+		l.info("Getting All Contrats");
+
 		List<Contrat> list=null;
 	try {
 		
 	
 		list=(List<Contrat>) contratRepository.findAll();
-		l.info("la list de contrats est"+list);
+
+		l.info("Successefilly fetched "+list.size()+ " Contrats");
 	}catch(Exception e) {
-		l.error("il y a erreur"+e);
+		l.error("unable to get Contracts"+e);
+	}
+		l.info("Sending response ");
+		return list ;
+	}
+
+
+	@Override
+	public Integer ajouterContrat(Contrat contrat) {
+		l.debug("In ajouterContrat");
+		try{
+			contratRepository.save(contrat);
+			l.info("Contrat ajouter avec ref = "+contrat.getReference());
+			l.debug("Contrat Saved Successefilly"+contrat);
+			return contrat.getReference();
+		} catch (Exception e) {
+			l.error("erreur dans la methode ajouterContrat :"+e);
+			return null;
+		}
+	}
+
+
+
+
+
+	@Override
+	public int deleteContratById(int contratId) {
+		l.debug("In deleteContratById ");
+		try {
+			
+				contratRepository.deleteById(contratId);
+		return (contratId);
+				
+			
+
+		} catch (Exception e) {
+			l.error("erreur methode deleteContratById :" + e);
+			
+
+		}
+		return -1;
+	}
+
+
+	@Override
+	public void deleteAllContrat() {
+		l.debug("In deleteAllContratJPQL ");
+		contratRepository.deleteAll();
+		l.info("Liste de contrats a été supprimer");
+		
+
 	}
 		l.info("Out getAllContrats() ");
 		return list ;
