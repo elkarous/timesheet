@@ -209,7 +209,7 @@ public class EmployeServiceImpl implements IEmployeService {
 	public List<Employe> getAllEmployes() {
 
 		logger.debug("lancement  de la methode get employé ");
-		List<Employe> employes = (List<Employe>) employeRepository.findAll();
+		List<Employe> employes = employeRepository.findAll();
 		logger.info("les employer sont : " + employes);
 		return employes;
 	}

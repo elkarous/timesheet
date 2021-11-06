@@ -56,23 +56,12 @@ public class TimesheetPK implements Serializable {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (obj == null || getClass() != obj.getClass()) {
 			return false;
 		}
 		TimesheetPK other = (TimesheetPK) obj;
-		if (dateDebut == null && other.dateDebut != null) {
-			return false;
-		}
-		if (dateFin == null && other.dateFin != null) {
-			return false;
-		}
-		if (idEmploye != other.idEmploye) {
-			return false;
-		}
-		if (idMission != other.idMission) {
+		if ((dateDebut == null && other.dateDebut != null) || (dateFin == null && other.dateFin != null)
+				|| idEmploye != other.idEmploye || idMission != other.idMission) {
 			return false;
 		}
 		return true;
