@@ -2,6 +2,7 @@ package tn.esprit.spring.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -13,12 +14,10 @@ import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Entreprise;
 
 @Repository
-public interface EmployeRepository extends CrudRepository<Employe, Integer>  {
+public interface EmployeRepository extends JpaRepository<Employe, Integer>  {
 	
 	@Query("SELECT e FROM Employe e WHERE e.email=:email and e.password=:pass")
 	public Employe getEmployeByEmailAndPassword(@Param("email")String login, @Param("pass")String pass);
-	
-	
 	
 	
 	@Query("SELECT count(*) FROM Employe")
