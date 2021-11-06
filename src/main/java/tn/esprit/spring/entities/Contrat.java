@@ -19,19 +19,13 @@ public class Contrat implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int reference;
-	
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
-	
 	private String typeContrat;
-	
-	
-	
 	@OneToOne
 	private Employe employe;
-
 	private float salaire;
-
+	
 	public Contrat() {
 		super();
 	}

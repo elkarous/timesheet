@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.esprit.spring.DTO.DepartementDto;
-import tn.esprit.spring.DTO.EntrepriseDto;
-
+import tn.esprit.spring.dto.DepartementDto;
+import tn.esprit.spring.dto.EntrepriseDto;
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.services.IEmployeService;

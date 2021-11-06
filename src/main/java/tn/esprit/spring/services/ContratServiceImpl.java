@@ -88,46 +88,15 @@ public class ContratServiceImpl implements IContratService {
 		
 
 	}
-		l.info("Out getAllContrats() ");
-		return list ;
-	}
-
-
-	@Override
-	public Integer ajouterContrat(Contrat contrat) {
-		l.debug("In ajouterContrat");
-		try{
-			contratRepository.save(contrat);
-			l.info("Contrat ajouter avec ref = "+contrat.getReference());
-			l.debug("Out ajouterContrat");
-			return contrat.getReference();
-		} catch (Exception e) {
-			l.error("erreur dans la methode ajouterContrat :"+e);
-			return null;
-		}
-	}
-
-
-
-
-
-	@Override
-	public int deleteContratById(int contratId) {
-		l.debug("In deleteContratById ");
-		try {
-			
-				contratRepository.deleteById(contratId);
 		
-				
-			
 
-		} catch (Exception e) {
-			l.error("erreur methode deleteContratById :" + e);
-			
+	
 
-		}
-		return -1;
-	}
+
+
+
+
+
 
 
 	@Override

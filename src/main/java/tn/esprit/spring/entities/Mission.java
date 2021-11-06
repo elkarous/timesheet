@@ -18,14 +18,10 @@ public class Mission implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	
 	private String name;
-	
 	private String description;
-	
 	@ManyToOne
 	private Departement departement;
-	
 	@OneToMany(mappedBy="mission")
 	private  List<Timesheet> timesheets;
 	

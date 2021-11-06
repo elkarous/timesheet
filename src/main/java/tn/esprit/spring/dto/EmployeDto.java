@@ -1,7 +1,4 @@
-package tn.esprit.spring.DTO;
-
-
-
+package tn.esprit.spring.dto;
 
 import java.util.List;
 import javax.persistence.EnumType;
@@ -21,26 +18,16 @@ public class EmployeDto {
 	
 
 	private int id;
-	
 	private String prenom;
-	
 	private String nom;
-	
-	
 	private String email;
-
 	private String password;
-	
 	private boolean actif;
-	
 	@Enumerated(EnumType.STRING)
 	private Role role;
-	
-	
 	@JsonIgnore
 	@ManyToMany(mappedBy="employes",fetch=FetchType.EAGER )
 	private List<Departement> departements;
-	
 	@JsonIgnore
 	@OneToOne(mappedBy="employe")
 	private Contrat contrat;

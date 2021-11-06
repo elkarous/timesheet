@@ -33,9 +33,8 @@ public class EmployeServiceImpl implements IEmployeService {
 	ContratRepository contratRepoistory;
 	@Autowired
 	TimesheetRepository timesheetRepository;
-	private static final Logger logger = Logger.getLogger(ControllerEmployeImpl.class);
+	private static final Logger logger = Logger.getLogger(EmployeServiceImpl.class);
 
-	private static final Logger logger = Logger.getLogger(EntrepriseServiceImpl.class);
 	
 	@Override
 	public Employe authenticate(String login, String password) {
@@ -70,15 +69,7 @@ public class EmployeServiceImpl implements IEmployeService {
 		}
 		
 
-		logger.debug("debut de la méthodeUpdate");
-
-
-		Optional<Employe> employe = employeRepository.findById(employeId);
-		if (employe.isPresent()) {
-			employe.get().setEmail(email);
-			employeRepository.save(employe.get());
-			logger.info("l'employé " + employe.get().getNom() + "a changé son email à" + email);
-		}
+		
 	}
 
 	@Transactional
@@ -100,11 +91,11 @@ if(departementOP.isPresent()) {
 
 
 			List<Employe> employes = new ArrayList<>();
-			employes.add(employeManagedEntity.get());
-			depManagedEntity.get().setEmployes(employes);
+			employes.add(employeManagedEntity);
+			depManagedEntity.setEmployes(employes);
 		} else {
 
-			depManagedEntity.get().getEmployes().add(employeManagedEntity.get());
+			depManagedEntity.getEmployes().add(employeManagedEntity);
 		}
 }
 		// à ajouter? 

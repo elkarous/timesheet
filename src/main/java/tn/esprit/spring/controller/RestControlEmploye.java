@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.esprit.spring.DTO.ContratDto;
-import tn.esprit.spring.DTO.EmployeDto;
+import tn.esprit.spring.dto.ContratDto;
+import tn.esprit.spring.dto.EmployeDto;
 import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Entreprise;

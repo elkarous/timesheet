@@ -1,4 +1,4 @@
-package tn.esprit.spring.DTO;
+package tn.esprit.spring.dto;
 
 import java.util.List;
 
@@ -6,9 +6,7 @@ import java.util.List;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.entities.Mission;
