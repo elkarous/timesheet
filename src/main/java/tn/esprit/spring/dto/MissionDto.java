@@ -7,10 +7,7 @@ import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Timesheet;
 
 public class MissionDto {
-private int id;
-	
-	private String name;
-	private String description;
+
 	@ManyToOne
 	private Departement departement;
 	@OneToMany(mappedBy="mission")

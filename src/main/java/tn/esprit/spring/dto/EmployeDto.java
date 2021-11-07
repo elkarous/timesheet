@@ -17,12 +17,7 @@ import tn.esprit.spring.entities.Timesheet;
 public class EmployeDto {
 	
 
-	private int idDto;
-	private String prenomDto;
-	private String nomDto;
-	private String emailDto;
-	private String passwordDto;
-	private boolean actifDto;
+	
 	@Enumerated(EnumType.STRING)
 	private Role roleDto;
 	@JsonIgnore

@@ -35,13 +35,7 @@ public class EmployeServiceImpl implements IEmployeService {
 	private static final Logger logger = Logger.getLogger(EmployeServiceImpl.class);
 
 	
-	/*@Override
-	public Employe authenticate(String login, String password) {
-		logger.debug("debut de la méthode authenticate");
-		return employeRepository.getEmployeByEmailAndPassword(login, password);
-
-	}*/
-
+	
 	@Override
 	public int addOrUpdateEmploye(Employe employe) {
 		logger.debug("debut de la méthode addOrUpdateEmploye");
@@ -259,7 +253,7 @@ if(departementOP.isPresent()) {
 
 	@Override
 	public Employe authenticate(String login, String password) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
