@@ -46,6 +46,7 @@ public class ControllerEmployeImpl  {
 
 
 	public String doLogin() {
+
 		String navigateTo = "null";
 		authenticatedUser=employeService.authenticate(login, password);
 		if (authenticatedUser != null && authenticatedUser.getRole() == Role.ADMINISTRATEUR) {
@@ -57,7 +58,9 @@ public class ControllerEmployeImpl  {
 			FacesMessage facesMessage =
 					new FacesMessage("Login Failed: Please check your username/password and try again.");
 			FacesContext.getCurrentInstance().addMessage("form:btn",facesMessage);
+
 		} return navigateTo;	
+
 	}
 
 	public String doLogout()

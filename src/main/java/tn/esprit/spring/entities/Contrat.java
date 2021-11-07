@@ -26,7 +26,6 @@ public class Contrat implements Serializable {
 	private String typeContrat;
 	
 	
-	private float telephone;
 	
 	@OneToOne
 	private Employe employe;

@@ -33,7 +33,6 @@ public class RestControlEntreprise {
 	ITimesheetService itimesheetservice;
 	
 	// http://localhost:8081/SpringMVC/servlet/ajouterEntreprise
-	
 
 	@PostMapping("/ajouterEntreprise")
 	@ResponseBody
