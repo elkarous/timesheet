@@ -13,9 +13,7 @@ import tn.esprit.spring.entities.Mission;
 
 public class DepartementDto {
 
-	private int id;
 	
-	private String name;
 	
 	//@JsonManagedReference 
 	@JsonIgnore

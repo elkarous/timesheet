@@ -9,12 +9,11 @@ import javax.persistence.TemporalType;
 
 public class ContratDto {
 
-	private int reference;
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
-	private String typeContrat;
+	
 	@OneToOne
 	private EmployeDto employe;
-	private float salaire;
+
 	
 }
