@@ -34,7 +34,6 @@ public class ControllerEmployeImpl  {
 	private String login; 
 	private String password; 
 	private Boolean loggedIn;
-
 	private Employe authenticatedUser = null; 
 	private String prenom; 
 	private String nom; 
@@ -42,14 +41,11 @@ public class ControllerEmployeImpl  {
 	private boolean actif;
 	private Role role;  
 	public Role[] getRoles() { return Role.values(); }
-
 	private List<Employe> employes; 
-
 	private Integer employeIdToBeUpdated; // getter et setter
 
 
 	public String doLogin() {
-
 		String navigateTo = "null";
 		authenticatedUser=employeService.authenticate(login, password);
 		if (authenticatedUser != null && authenticatedUser.getRole() == Role.ADMINISTRATEUR) {
@@ -57,14 +53,11 @@ public class ControllerEmployeImpl  {
 			loggedIn = true;
 		}		
 
-		else
-		{
-			
+		else{
 			FacesMessage facesMessage =
 					new FacesMessage("Login Failed: Please check your username/password and try again.");
 			FacesContext.getCurrentInstance().addMessage("form:btn",facesMessage);
-		}
-		return navigateTo;	
+		} return navigateTo;	
 	}
 
 	public String doLogout()

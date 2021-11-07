@@ -19,13 +19,20 @@ public class Contrat implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int reference;
+	
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
+	
 	private String typeContrat;
+	
+	
+	private float telephone;
+	
 	@OneToOne
 	private Employe employe;
+
 	private float salaire;
-	
+
 	public Contrat() {
 		super();
 	}
@@ -36,14 +43,6 @@ public class Contrat implements Serializable {
 		this.salaire = salaire;
 	}
 
-
-	public Contrat(int reference, Date dateDebut, String typeContrat, float salaire) {
-		super();
-		this.reference = reference;
-		this.dateDebut = dateDebut;
-		this.typeContrat = typeContrat;
-		this.salaire = salaire;
-	}
 
 	public Date getDateDebut() {
 		return dateDebut;
@@ -83,6 +82,14 @@ public class Contrat implements Serializable {
 
 	public void setEmploye(Employe employe) {
 		this.employe = employe;
+	}
+
+	public float getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(float telephone) {
+		this.telephone = telephone;
 	}
 	
 	
