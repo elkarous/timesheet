@@ -41,7 +41,7 @@ public class RestControlEntreprise {
 		 ModelMapper modelMapper = new ModelMapper();
 		 Entreprise entreprise = modelMapper.map(ssiiConsulting, Entreprise.class);
 		ientrepriseservice.ajouterEntreprise(entreprise);
-		return ssiiConsulting.getId();
+		return entreprise.getId();
 	}
 	
 	// http://localhost:8081/SpringMVC/servlet/affecterDepartementAEntreprise/1/1

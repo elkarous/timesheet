@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import tn.esprit.spring.controller.ControllerEmployeImpl;
 import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Employe;
@@ -36,12 +35,12 @@ public class EmployeServiceImpl implements IEmployeService {
 	private static final Logger logger = Logger.getLogger(EmployeServiceImpl.class);
 
 	
-	@Override
+	/*@Override
 	public Employe authenticate(String login, String password) {
 		logger.debug("debut de la méthode authenticate");
 		return employeRepository.getEmployeByEmailAndPassword(login, password);
 
-	}
+	}*/
 
 	@Override
 	public int addOrUpdateEmploye(Employe employe) {
@@ -256,6 +255,12 @@ if(departementOP.isPresent()) {
 		List<Employe> employes = employeRepository.findAll();
 		logger.info("les employer sont : " + employes);
 		return employes;
+	}
+
+	@Override
+	public Employe authenticate(String login, String password) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
