@@ -16,7 +16,7 @@ import static org.junit.Assert.assertNotNull;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class TestEntrepriseService {
+public class EntrepriseServiceTests {
 
     @Autowired
     ControllerEntrepriseImpl entrepriseController;

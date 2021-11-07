@@ -35,7 +35,7 @@ import tn.esprit.spring.services.IContratService;
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
 @SpringBootTest
-public class ContratServiceImplTest {
+public class ContratServiceImplTests {
 	@InjectMocks
 	ContratServiceImpl cs;
 	@Mock
