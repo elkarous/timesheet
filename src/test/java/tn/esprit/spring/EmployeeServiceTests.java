@@ -25,7 +25,7 @@ import tn.esprit.spring.services.IEmployeService;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 
-public class TestEmployeeService {
+public class EmployeeServiceTests {
 	@Autowired
 	EmployeServiceImpl employeServiceImpl;
 

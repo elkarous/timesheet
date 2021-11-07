@@ -14,7 +14,7 @@ import tn.esprit.spring.services.TimesheetServiceImpl;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class TestTimeSheetService {
+public class TimeSheetServiceTests {
 	
 	  @Autowired
 		TimesheetServiceImpl timesheetService;
