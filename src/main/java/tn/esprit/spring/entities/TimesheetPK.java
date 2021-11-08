@@ -11,15 +11,11 @@ import javax.persistence.TemporalType;
 public class TimesheetPK implements Serializable {
 
 	private static final long serialVersionUID = 5377539445871317492L;
-
 	private int idMission;
-
 	private int idEmploye;
-
 	// Choisir le TemporalType selon le besoin metier
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
-
 	@Temporal(TemporalType.DATE)
 	private Date dateFin;
 

@@ -25,12 +25,15 @@ public class ContratServiceImpl implements IContratService {
 
 
 	public List<Contrat> getAllContrats() {
+
 		l.info("Getting All Contrats");
+
 		List<Contrat> list=null;
 	try {
 		
 	
 		list=(List<Contrat>) contratRepository.findAll();
+
 		l.info("Successefilly fetched "+list.size()+ " Contrats");
 	}catch(Exception e) {
 		l.error("unable to get Contracts"+e);
@@ -83,6 +86,24 @@ public class ContratServiceImpl implements IContratService {
 		contratRepository.deleteAll();
 		l.info("Liste de contrats a été supprimer");
 		
-	}
 
+	}
+		
+
+	
+
+
+
+
+
+
+
+
+	@Override
+	public void deleteAllContratJPQL() {
+		l.debug("In deleteAllContratJPQL ");
+		employeRepository.deleteAllContratJPQL();
+		l.info("Liste de contrats a été supprimer");
+		
+	}
 }

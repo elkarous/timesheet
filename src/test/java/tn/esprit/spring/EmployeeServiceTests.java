@@ -5,6 +5,7 @@ package tn.esprit.spring;
 
 import java.util.Date;
 
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import tn.esprit.spring.controller.ControllerEmployeImpl;
-import tn.esprit.spring.controller.ControllerEntrepriseImpl;
+
 import tn.esprit.spring.entities.Employe;
-import tn.esprit.spring.entities.Mission;
 import tn.esprit.spring.entities.Role;
 import tn.esprit.spring.services.EmployeServiceImpl;
 import tn.esprit.spring.services.IEmployeService;
@@ -25,7 +25,7 @@ import tn.esprit.spring.services.IEmployeService;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 
-public class TestEmployeeService {
+public class EmployeeServiceTests {
 	@Autowired
 	EmployeServiceImpl employeServiceImpl;
 

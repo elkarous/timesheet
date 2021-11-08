@@ -28,23 +28,25 @@ import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.repository.ContratRepository;
 import tn.esprit.spring.repository.EmployeRepository;
 import tn.esprit.spring.services.ContratServiceImpl;
+
 import tn.esprit.spring.services.IContratService;
 
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
 @SpringBootTest
-public class ContratServiceImplTest {
+public class ContratServiceImplTests {
 	@InjectMocks
 	ContratServiceImpl cs;
 	@Mock
 	EmployeRepository employeRepository;
 	@Mock
+
 	ContratRepository contratRepository;
 	
 	@Test
 	public void testGetAllContrats(){
-		// Given 
+
 		List <Contrat> contrats= new ArrayList(); 
 		contrats.add(new Contrat(new Date(),"Stage1",3089));
 		contrats.add(new Contrat(new Date(),"Stage2",8432));
@@ -58,6 +60,7 @@ public class ContratServiceImplTest {
 		// Assert 
 		assertSame(lc,contrats);
 		
+
 	}
 	
 	@Test
@@ -103,3 +106,4 @@ public class ContratServiceImplTest {
 }
 	
 	
+

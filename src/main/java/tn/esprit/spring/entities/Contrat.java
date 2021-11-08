@@ -25,7 +25,9 @@ public class Contrat implements Serializable {
 	
 	private String typeContrat;
 	
-	
+
+	private float telephone;
+
 	
 	@OneToOne
 	private Employe employe;
@@ -42,14 +44,6 @@ public class Contrat implements Serializable {
 		this.salaire = salaire;
 	}
 
-
-	public Contrat(int reference, Date dateDebut, String typeContrat, float salaire) {
-		super();
-		this.reference = reference;
-		this.dateDebut = dateDebut;
-		this.typeContrat = typeContrat;
-		this.salaire = salaire;
-	}
 
 	public Date getDateDebut() {
 		return dateDebut;
@@ -89,6 +83,14 @@ public class Contrat implements Serializable {
 
 	public void setEmploye(Employe employe) {
 		this.employe = employe;
+	}
+
+	public float getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(float telephone) {
+		this.telephone = telephone;
 	}
 	
 	
