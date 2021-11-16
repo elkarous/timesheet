@@ -75,7 +75,9 @@ public class EmployeeServiceTests {
 
 	@Test
 	public   void  testgetAllEmployes() {
-		 employeServiceImpl.getAllEmployes();
+		Employe employe=new Employe(50,"wajdi","Ammar","wajdi@gmail.tn","123456",true,Role.ADMINISTRATEUR);
+		employeService.addOrUpdateEmploye(employe);
+		employeService.getAllEmployes();
 	}
 	
 
@@ -116,8 +118,7 @@ public class EmployeeServiceTests {
 	
 
 ///////////////////////////////////////////////////////////////// mohamed //////////////////////////////////////////////
-	/*@Test
-	//update contract
+@Test
 	public void testAffecterContratAEmploye() {
 		Date  dateDebut = new Date( "08/07/2021" );
 		Employe employe= Controller.ajouterEmploye (new EmployeDto("Chedi","Rhaiem","chedy.rhaiemeu@esprit.tn",true,Role.ADMINISTRATEUR ));
@@ -126,7 +127,7 @@ public class EmployeeServiceTests {
 		
 		//controllerEmploye.deleteEmployeById(employe.getId());
 		
-	}*/
+	}
 @Test
 public void testgetEmployePrenomById() {
  String prenom = employeServiceImpl.getEmployePrenomById(20);
