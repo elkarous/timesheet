@@ -15,6 +15,7 @@ import tn.esprit.spring.entities.Entreprise;
 @Repository
 public interface EmployeRepository extends JpaRepository<Employe, Integer>  {
 	
+
 	public Employe findByEmail(String email);
 	
 

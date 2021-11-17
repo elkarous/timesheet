@@ -8,9 +8,6 @@ import javax.persistence.OneToMany;
 import tn.esprit.spring.entities.Departement;
 
 public class EntrepriseDto {
-   private int id;
-	private String name;
-	private String raisonSocial;
 	@OneToMany(mappedBy="entreprise", 
 			cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, 
 			fetch=FetchType.EAGER)

@@ -3,6 +3,11 @@ package tn.esprit.spring;
 
 
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+
 import java.util.Date;
 
 
@@ -13,7 +18,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import tn.esprit.spring.controller.ControllerEmployeImpl;
-
+import tn.esprit.spring.controller.RestControlEmploye;
+import tn.esprit.spring.dto.ContratDto;
+import tn.esprit.spring.dto.EmployeDto;
+import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Role;
 import tn.esprit.spring.services.EmployeServiceImpl;
@@ -31,7 +39,7 @@ public class EmployeeServiceTests {
 
 	
 	@Autowired
-    ControllerEmployeImpl Controller;
+	RestControlEmploye Controller;
 	@Autowired
 	IEmployeService employeService;
 	
@@ -67,7 +75,9 @@ public class EmployeeServiceTests {
 
 	@Test
 	public   void  testgetAllEmployes() {
-		 employeServiceImpl.getAllEmployes();
+		Employe employe=new Employe(50,"wajdi","Ammar","wajdi@gmail.tn","123456",true,Role.ADMINISTRATEUR);
+		employeService.addOrUpdateEmploye(employe);
+		employeService.getAllEmployes();
 	}
 	
 
@@ -106,4 +116,29 @@ public class EmployeeServiceTests {
 		 employeServiceImpl.deleteAllContratJPQL();
 	}
 	
+
+///////////////////////////////////////////////////////////////// mohamed //////////////////////////////////////////////
+@Test
+	public void testAffecterContratAEmploye() {
+		Date  dateDebut = new Date( "08/07/2021" );
+		Employe employe= Controller.ajouterEmploye (new EmployeDto("Chedi","Rhaiem","chedy.rhaiemeu@esprit.tn",true,Role.ADMINISTRATEUR ));
+		Contrat contrat = Controller.ajouterContrat(new ContratDto(dateDebut,"CDI",1252));
+		Controller.affecterContratAEmploye(contrat.getReference(), employe.getId());
+		
+		//controllerEmploye.deleteEmployeById(employe.getId());
+		
+	}
+@Test
+public void testgetEmployePrenomById() {
+ String prenom = employeServiceImpl.getEmployePrenomById(20);
+assertThat(prenom).isEqualTo(null);
+}
+@Test
+public void testDeleteEmployeById() {
+	Employe employe= Controller.ajouterEmploye (new EmployeDto("Chedi","Rh","chedy.rhaiemeu@esprit.tn",true,Role.ADMINISTRATEUR ));
+	assertNotEquals(employe.getId(),0);
+	Controller.deleteEmployeById(employe.getId());
+	
+}
+
 }

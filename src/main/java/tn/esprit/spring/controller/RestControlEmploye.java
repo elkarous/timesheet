@@ -75,11 +75,11 @@ public class RestControlEmploye {
 	
 	@PostMapping("/ajouterContrat")
 	@ResponseBody
-	public int ajouterContrat(@RequestBody ContratDto contratDto) {
+	public Contrat ajouterContrat(@RequestBody ContratDto contratDto) {
 		 ModelMapper modelMapper = new ModelMapper();
 		 Contrat contrat = modelMapper.map(contratDto, Contrat.class);
 		iemployeservice.ajouterContrat(contrat);
-		return contrat.getReference();
+		return contrat;
 	}
 	
 	// http://localhost:8081/SpringMVC/servlet/affecterContratAEmploye/6/1

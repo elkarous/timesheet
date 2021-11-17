@@ -35,13 +35,7 @@ public class EmployeServiceImpl implements IEmployeService {
 	private static final Logger logger = Logger.getLogger(EmployeServiceImpl.class);
 
 	
-	/*@Override
-	public Employe authenticate(String login, String password) {
-		logger.debug("debut de la méthode authenticate");
-		return employeRepository.getEmployeByEmailAndPassword(login, password);
-
-	}*/
-
+	
 	@Override
 	public int addOrUpdateEmploye(Employe employe) {
 		logger.debug("debut de la méthode addOrUpdateEmploye");
@@ -130,12 +124,14 @@ if(departementOP.isPresent()) {
 		contratRepoistory.save(contrat);
 		return contrat.getReference();
 	}
+	//////////////////////////////////////////////////////////////////////HAMOUDA/////////////////////////
 
 	public void affecterContratAEmploye(int contratId, int employeId) {
-
+		logger.debug("lancement  de la methode affecterContratAEmploye ");
 		
 		Employe employeManagedEntity = null;
 		Optional<Employe> employeOP=employeRepository.findById(employeId);
+
 		if(employeOP.isPresent()) {
 			employeManagedEntity = employeOP.get();
 		}
@@ -145,13 +141,14 @@ if(departementOP.isPresent()) {
 			contratManagedEntity = contratOp.get();
 		contratManagedEntity.setEmploye(employeManagedEntity);
 		}
+		
 		contratRepoistory.save(contratManagedEntity);
-
+		logger.info("save : " + contratManagedEntity);
 
 	}
 
 	public String getEmployePrenomById(int employeId) {
-
+		logger.debug("lancement  de la methode getEmployePrenomById ");
 		Employe employeManagedEntity = null;
 		String nom=null;
 		try {
@@ -160,8 +157,12 @@ if(departementOP.isPresent()) {
 			employeManagedEntity = employeOP.get();
 		
        nom =employeManagedEntity.getPrenom();
+       
 		}
-		}catch(Exception e) {
+		logger.info("employe: "+ employeOP);
+		}
+		
+		catch(Exception e) {
 			logger.error(e);
 		}
 		return nom;
@@ -169,7 +170,10 @@ if(departementOP.isPresent()) {
 	}
 	 
 	public void deleteEmployeById(int employeId)
-	{ Employe employe = null;
+	
+	{ 
+		logger.debug("lancement  de la methode deleteEmployeById ");	
+		Employe employe = null;
 	Optional<Employe> employeOP=employeRepository.findById(employeId);
 	if(employeOP.isPresent()) {
 		employe = employeOP.get();
@@ -180,9 +184,11 @@ if(departementOP.isPresent()) {
 		}
 	}
 		employeRepository.delete(employe);
+		logger.info("methode termine ");
 	}
 
 	public void deleteContratById(int contratId) {
+		logger.debug("lancement  de la methode deleteContratById ");	
 		Contrat contratManagedEntity = null;
 		Optional<Contrat> contratOp=contratRepoistory.findById(contratId);
 		if(contratOp.isPresent()) {
@@ -190,27 +196,48 @@ if(departementOP.isPresent()) {
 		}
 		
 		contratRepoistory.delete(contratManagedEntity);
+		logger.info("contrat suprime ");
 
 	}
 
 	public int getNombreEmployeJPQL() {
-		return employeRepository.countemp();
+		logger.debug("lancement  de la methode getNombreEmployeJPQL ");
+		//int EmployeNamesJPQL = employeRepository.employeNames();
+		int EmployeNamesJPQLa =employeRepository.countemp();
+		logger.info("les employers sont : " + EmployeNamesJPQLa);
+		return EmployeNamesJPQLa;
+		
 	}
+	
 
 	public List<String> getAllEmployeNamesJPQL() {
-		return employeRepository.employeNames();
+		logger.debug("lancement  de la methode getAllEmployeNamesJPQL ");
+		List<String> EmployeNamesJPQL = employeRepository.employeNames();
+		logger.info("le salire est : " + EmployeNamesJPQL);
+		return EmployeNamesJPQL;
 
 	}
 
 	public List<Employe> getAllEmployeByEntreprise(Entreprise entreprise) {
-		return employeRepository.getAllEmployeByEntreprisec(entreprise);
+		logger.debug("lancement  de la methode getAllEmployeByEntreprise ");
+		List<Employe> EmployeNamesJPQL =employeRepository.getAllEmployeByEntreprisec(entreprise);
+		logger.info("le salire est : " + EmployeNamesJPQL);
+		return EmployeNamesJPQL;
+		
 	}
 
 	public void mettreAjourEmailByEmployeIdJPQL(String email, int employeId) {
+		logger.debug("lancement  de la methode mettreAjourEmailByEmployeIdJPQL ");
+		try {
 		employeRepository.mettreAjourEmailByEmployeIdJPQL(email, employeId);
+		logger.info("suprimé avec succes");
+		} catch (Exception e) {
+			logger.error("il y a un probleme" + e);
+
+		}
 
 	}
-
+////////////////////////////////////////////////////////////////
 	public void deleteAllContratJPQL() {
 		logger.debug("lancement  de la methode deleteAllContratJPQL ");
 		try {
