@@ -286,7 +286,13 @@ if(departementOP.isPresent()) {
 	@Override
 	public Employe authenticate(String login, String password) {
 
-		return null;
+
+
+
+		return employeRepository.findByEmail(login);
+
+
+
 	}
 
 }

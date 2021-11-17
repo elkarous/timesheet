@@ -15,9 +15,10 @@ import tn.esprit.spring.entities.Entreprise;
 @Repository
 public interface EmployeRepository extends JpaRepository<Employe, Integer>  {
 	
-	/*@Query("SELECT e FROM Employe e WHERE e.email=:email and e.password=:pass")
+
+	public Employe findByEmail(String email);
 	
-	*/
+
 	
 	@Query("SELECT count(*) FROM Employe")
     public int countemp();

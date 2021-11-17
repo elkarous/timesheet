@@ -1,5 +1,6 @@
 package tn.esprit.spring;
 
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.mockito.BDDMockito.given;
@@ -21,9 +22,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import tn.esprit.spring.entities.Contrat;
+
+
+import org.springframework.test.context.junit4.SpringRunner;
+
+import tn.esprit.spring.entities.Contrat;
+
 import tn.esprit.spring.repository.ContratRepository;
 import tn.esprit.spring.repository.EmployeRepository;
 import tn.esprit.spring.services.ContratServiceImpl;
+
+
+
 
 
 
@@ -42,7 +52,7 @@ public class ContratServiceImplTests {
 	@Test
 	public void testGetAllContrats(){
 
-		List <Contrat> contrats= new ArrayList(); 
+		List <Contrat> contrats= new ArrayList<Contrat>(); 
 		contrats.add(new Contrat(new Date(),"Stage1",3089));
 		contrats.add(new Contrat(new Date(),"Stage2",8432));
 		
