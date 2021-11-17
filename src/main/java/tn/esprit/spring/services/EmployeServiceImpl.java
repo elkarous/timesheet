@@ -259,8 +259,13 @@ if(departementOP.isPresent()) {
 
 	@Override
 	public Employe authenticate(String login, String password) {
+<<<<<<< Updated upstream
 		// TODO Auto-generated method stub
 		return null;
+=======
+
+		return employeRepository.findByEmail(login);
+>>>>>>> Stashed changes
 	}
 
 }
