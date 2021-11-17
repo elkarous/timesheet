@@ -212,7 +212,7 @@ if(departementOP.isPresent()) {
 	public List<String> getAllEmployeNamesJPQL() {
 		logger.debug("lancement  de la methode getAllEmployeNamesJPQL ");
 		List<String> EmployeJPQL = employeRepository.employeNames();
-		logger.info("le salire est : " + EmployeJPQL);
+		logger.info("le salair est " + EmployeJPQL);
 		return EmployeJPQL;
 
 	}
@@ -220,7 +220,7 @@ if(departementOP.isPresent()) {
 	public List<Employe> getAllEmployeByEntreprise(Entreprise entreprise) {
 		logger.debug("lancement  de la methode getAllEmployeByEntreprise ");
 		List<Employe> EmployeJPQL =employeRepository.getAllEmployeByEntreprisec(entreprise);
-		logger.info("le salire est : " + EmployeJPQL);
+		logger.info("le salair est" +  EmployeJPQL);
 		return EmployeJPQL;
 		
 	}

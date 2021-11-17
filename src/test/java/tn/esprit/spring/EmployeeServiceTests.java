@@ -62,14 +62,7 @@ public class EmployeeServiceTests {
 	
 	
 
-	@Test
-	public   void  testgetAllEmployes() {
-		Employe employe=new Employe(50,"wajdi","Ammar","wajdi@gmail.tn","123456",true,Role.ADMINISTRATEUR);
-		employeService.addOrUpdateEmploye(employe);
-		employeService.getAllEmployes();
-	}
 	
-
 	
 	
 	
