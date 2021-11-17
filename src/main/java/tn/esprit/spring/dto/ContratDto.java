@@ -9,6 +9,12 @@ import javax.persistence.TemporalType;
 
 public class ContratDto {
 
+
+	public ContratDto(Date dateDebut2, String string, int i) {
+
+	}
+
+
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
 	
