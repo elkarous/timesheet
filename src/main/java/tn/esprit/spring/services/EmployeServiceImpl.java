@@ -173,17 +173,17 @@ if(departementOP.isPresent()) {
 	
 	{ 
 		logger.debug("lancement  de la methode deleteEmployeById ");	
-		Employe employe = null;
+		Employe emp = null;
 	Optional<Employe> employeOP=employeRepository.findById(employeId);
 	if(employeOP.isPresent()) {
-		employe = employeOP.get();
+		emp = employeOP.get();
 	
 
-		for(Departement dep : employe.getDepartements()){
-			dep.getEmployes().remove(employe);
+		for(Departement dep : emp.getDepartements()){
+			dep.getEmployes().remove(emp);
 		}
 	}
-		employeRepository.delete(employe);
+		employeRepository.delete(emp);
 		logger.info("methode termine ");
 	}
 
@@ -202,27 +202,26 @@ if(departementOP.isPresent()) {
 
 	public int getNombreEmployeJPQL() {
 		logger.debug("lancement  de la methode getNombreEmployeJPQL ");
-		//int EmployeNamesJPQL = employeRepository.employeNames();
-		int EmployeNamesJPQLa =employeRepository.countemp();
-		logger.info("les employers sont : " + EmployeNamesJPQLa);
-		return EmployeNamesJPQLa;
+		int employeJPQL =employeRepository.countemp();
+		logger.info("les employers sont : " + employeJPQL);
+		return employeJPQL;
 		
 	}
 	
 
 	public List<String> getAllEmployeNamesJPQL() {
 		logger.debug("lancement  de la methode getAllEmployeNamesJPQL ");
-		List<String> EmployeNamesJPQL = employeRepository.employeNames();
-		logger.info("le salire est : " + EmployeNamesJPQL);
-		return EmployeNamesJPQL;
+		List<String> EmployeJPQL = employeRepository.employeNames();
+		logger.info("le salire est : " + EmployeJPQL);
+		return EmployeJPQL;
 
 	}
 
 	public List<Employe> getAllEmployeByEntreprise(Entreprise entreprise) {
 		logger.debug("lancement  de la methode getAllEmployeByEntreprise ");
-		List<Employe> EmployeNamesJPQL =employeRepository.getAllEmployeByEntreprisec(entreprise);
-		logger.info("le salire est : " + EmployeNamesJPQL);
-		return EmployeNamesJPQL;
+		List<Employe> EmployeJPQL =employeRepository.getAllEmployeByEntreprisec(entreprise);
+		logger.info("le salire est : " + EmployeJPQL);
+		return EmployeJPQL;
 		
 	}
 
@@ -287,7 +286,13 @@ if(departementOP.isPresent()) {
 	@Override
 	public Employe authenticate(String login, String password) {
 
-		return null;
+
+
+
+		return employeRepository.findByEmail(login);
+
+
+
 	}
 
 }
