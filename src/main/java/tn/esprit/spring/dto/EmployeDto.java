@@ -15,39 +15,9 @@ import tn.esprit.spring.entities.Timesheet;
 
 
 public class EmployeDto {
-private int id;
-	
-	private String prenom;
-	
-	private String nom;
-	
-	//@Column(unique=true)
-	private String email;
-
-	private boolean isActif;
-	
-	@Enumerated(EnumType.STRING)
-	//@NotNull
-	private Role role;
 	
 
 	
-	
-
-	
-
-	
-
-	public EmployeDto( String prenom, String nom, String email, boolean isActif, Role role) {
-		super();
-		
-		this.prenom = prenom;
-		this.nom = nom;
-		this.email = email;
-		this.isActif = isActif;
-		this.role = role;
-	}
-
 	@Enumerated(EnumType.STRING)
 	private Role roleDto;
 	@JsonIgnore
