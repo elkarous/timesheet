@@ -12,7 +12,7 @@ import tn.esprit.spring.entities.Employe;
 public class ContratDto {
 
 	public ContratDto(Date dateDebut2, String string, int i) {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	@Temporal(TemporalType.DATE)
