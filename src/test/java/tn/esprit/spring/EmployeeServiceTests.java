@@ -90,7 +90,7 @@ public class EmployeeServiceTests {
 	public void testAffecterContratAEmploye() {
 		Date  dateDebut = new Date( "08/07/2021" );
 		Employe employe= controller.ajouterEmploye (new EmployeDto( ));
-		Contrat contrat = controller.ajouterContrat(new ContratDto());
+		Contrat contrat = controller.ajouterContrat(new ContratDto(dateDebut, "CDI", 1254));
 		controller.affecterContratAEmploye(contrat.getReference(), employe.getId());
 	
 		

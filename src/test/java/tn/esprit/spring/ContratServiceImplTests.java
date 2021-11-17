@@ -24,9 +24,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import tn.esprit.spring.entities.Contrat;
 
 
-import org.springframework.test.context.junit4.SpringRunner;
 
-import tn.esprit.spring.entities.Contrat;
 
 import tn.esprit.spring.repository.ContratRepository;
 import tn.esprit.spring.repository.EmployeRepository;

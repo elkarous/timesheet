@@ -36,8 +36,8 @@ public class TimesheetApplication {
 
 
 	@Bean
-	public FilterRegistrationBean loginFilter() {
-		FilterRegistrationBean registration = new FilterRegistrationBean();
+	public FilterRegistrationBean<LoginFilter> loginFilter() {
+		FilterRegistrationBean<LoginFilter> registration = new FilterRegistrationBean<>();
 		registration.addUrlPatterns("/pages/*");
 		registration.setFilter(new LoginFilter());
 		return registration;
