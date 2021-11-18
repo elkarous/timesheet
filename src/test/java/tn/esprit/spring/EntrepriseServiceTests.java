@@ -21,14 +21,13 @@ public class EntrepriseServiceTests {
     @Autowired
     ControllerEntrepriseImpl entrepriseController;
 
-    Integer a,b;
 
     @Test
     public void testAjouterEntreprise(){
 
         Entreprise ent=new Entreprise("esprit","Ghazala");
-        a= entrepriseController.ajouterEntreprise(ent);
-        assertNotNull(a);
+       
+        assertNotNull(entrepriseController.ajouterEntreprise(ent));
 
 
     }
@@ -46,8 +45,7 @@ public class EntrepriseServiceTests {
     public void testAjouterDepartement(){
 
         Departement dep=new Departement("tech");
-        b=entrepriseController.ajouterDepartement(dep);
-        assertNotNull(b);
+        assertNotNull(entrepriseController.ajouterDepartement(dep));
     }
 
 
