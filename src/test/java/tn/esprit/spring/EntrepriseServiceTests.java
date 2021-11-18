@@ -11,17 +11,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import tn.esprit.spring.controller.ControllerEntrepriseImpl;
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Entreprise;
-import tn.esprit.spring.services.EntrepriseServiceImpl;
-import tn.esprit.spring.services.IEntrepriseService;
-
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class TestEntrepriseService {
+public class EntrepriseServiceTests {
 
     @Autowired
     ControllerEntrepriseImpl entrepriseController;

@@ -11,23 +11,18 @@ import javax.persistence.TemporalType;
 public class TimesheetPK implements Serializable {
 
 	private static final long serialVersionUID = 5377539445871317492L;
-
 	private int idMission;
-	
 	private int idEmploye;
-	
-	//Choisir le TemporalType selon le besoin metier
+	// Choisir le TemporalType selon le besoin metier
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
-	
 	@Temporal(TemporalType.DATE)
 	private Date dateFin;
-	
 
 	public TimesheetPK() {
 		super();
 	}
-	
+
 	public TimesheetPK(int idMission, int idEmploye, Date dateDebut, Date dateFin) {
 		super();
 		this.idMission = idMission;
@@ -36,10 +31,11 @@ public class TimesheetPK implements Serializable {
 		this.dateFin = dateFin;
 	}
 
-	//Pour que hibernate peut comparer deux objets (par exemple : recherche de l'objet dans le persistenceContext), 
-	//Il doit pouvoir comparer les primary key des deux entites
-	//Vu que l'entite a une clé composé, on doit implementer la methode equal.
-	//Utiliser l'IDE pour générer le equal et le hashcode
+	// Pour que hibernate peut comparer deux objets (par exemple : recherche de
+	// l'objet dans le persistenceContext),
+	// Il doit pouvoir comparer les primary key des deux entites
+	// Vu que l'entite a une clé composé, on doit implementer la methode equal.
+	// Utiliser l'IDE pour générer le equal et le hashcode
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -53,29 +49,17 @@ public class TimesheetPK implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null || getClass() != obj.getClass()) {
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		}
 		TimesheetPK other = (TimesheetPK) obj;
-		if (dateDebut == null) {
-			if (other.dateDebut != null)
-				return false;
-		} else 
-			if (!dateDebut.equals(other.dateDebut))
+		if ((dateDebut == null && other.dateDebut != null) || (dateFin == null && other.dateFin != null)
+				|| idEmploye != other.idEmploye || idMission != other.idMission) {
 			return false;
-		if (dateFin == null) {
-			if (other.dateFin != null)
-				return false;
-		} else 
-			if (!dateFin.equals(other.dateFin))
-			return false;
-		if (idEmploye != other.idEmploye)
-			return false;
-		if (idMission != other.idMission)
-			return false;
+		}
 		return true;
 	}
 

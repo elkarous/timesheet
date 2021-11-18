@@ -3,13 +3,13 @@ package tn.esprit.spring.services;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import tn.esprit.spring.controller.ControllerEmployeImpl;
 import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Employe;
@@ -32,60 +32,82 @@ public class EmployeServiceImpl implements IEmployeService {
 	ContratRepository contratRepoistory;
 	@Autowired
 	TimesheetRepository timesheetRepository;
-	private static final Logger logger = Logger.getLogger(ControllerEmployeImpl.class);
-	@Override
-	public Employe authenticate(String login, String password) {
-		logger.debug("debut de la méthode authenticate");
-		return employeRepository.getEmployeByEmailAndPassword(login, password);
-		
-	}
+	private static final Logger logger = Logger.getLogger(EmployeServiceImpl.class);
 
+	
+	
 	@Override
 	public int addOrUpdateEmploye(Employe employe) {
 		logger.debug("debut de la méthode addOrUpdateEmploye");
 		try {
-		employeRepository.save(employe);
-		}catch(Exception e ) {
+			employeRepository.save(employe);
+		} catch (Exception e) {
 			logger.error("probléme d'ajout ");
 		}
 		logger.info(employe);
 		return employe.getId();
 	}
 
-
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
+
 		logger.debug("debut de la méthodeUpdate");
+		Employe employe = null;
+		Optional<Employe> employeOP=employeRepository.findById(employeId);
+		if(employeOP.isPresent()) {
+			employe = employeOP.get();
 		
-		Employe employe = employeRepository.findById(employeId).get();
 		employe.setEmail(email);
 		employeRepository.save(employe);
 		logger.info("l'employé "+employe.getNom()+"a changé son email à"+email );
+		}
+		
 
+		
 	}
 
-	@Transactional	
+	@Transactional
 	public void affecterEmployeADepartement(int employeId, int depId) {
-		Departement depManagedEntity = deptRepoistory.findById(depId).get();
-		Employe employeManagedEntity = employeRepository.findById(employeId).get();
+
+		
+		Employe employeManagedEntity = null;
+		Optional<Employe> employeOP=employeRepository.findById(employeId);
+		if(employeOP.isPresent()) {
+			employeManagedEntity = employeOP.get();
+		}
 logger.info("gfguihio");
+Departement depManagedEntity = null;
+Optional<Departement> departementOP=deptRepoistory.findById(depId);
+if(departementOP.isPresent()) {
+	depManagedEntity = departementOP.get();
+
 		if(depManagedEntity.getEmployes() == null){
+
 
 			List<Employe> employes = new ArrayList<>();
 			employes.add(employeManagedEntity);
 			depManagedEntity.setEmployes(employes);
-		}else{
+		} else {
 
 			depManagedEntity.getEmployes().add(employeManagedEntity);
 		}
-
+}
 		// à ajouter? 
 		deptRepoistory.save(depManagedEntity); 
 
+
+
 	}
+
 	@Transactional
+
 	public void desaffecterEmployeDuDepartement(int employeId, int depId)
 	{
-		Departement dep = deptRepoistory.findById(depId).get();
+		Departement dep = null;
+		Optional<Departement> departementOP=deptRepoistory.findById(depId);
+		if(departementOP.isPresent()) {
+			dep = departementOP.get();
+		
+		
 
 		int employeNb = dep.getEmployes().size();
 		for(int index = 0; index < employeNb; index++){
@@ -93,7 +115,7 @@ logger.info("gfguihio");
 				dep.getEmployes().remove(index);
 				break;//a revoir
 			}
-		}
+		}}
 	} 
 	
 	// Tablesapce (espace disque) 
@@ -102,118 +124,175 @@ logger.info("gfguihio");
 		contratRepoistory.save(contrat);
 		return contrat.getReference();
 	}
+	//////////////////////////////////////////////////////////////////////HAMOUDA/////////////////////////
 
 	public void affecterContratAEmploye(int contratId, int employeId) {
-		Contrat contratManagedEntity = contratRepoistory.findById(contratId).get();
-		Employe employeManagedEntity = employeRepository.findById(employeId).get();
+		logger.debug("lancement  de la methode affecterContratAEmploye ");
+		
+		Employe employeManagedEntity = null;
+		Optional<Employe> employeOP=employeRepository.findById(employeId);
 
+		if(employeOP.isPresent()) {
+			employeManagedEntity = employeOP.get();
+		}
+		Contrat contratManagedEntity = null;
+		Optional<Contrat> contratOp=contratRepoistory.findById(contratId);
+		if(contratOp.isPresent()) {
+			contratManagedEntity = contratOp.get();
 		contratManagedEntity.setEmploye(employeManagedEntity);
+		}
+		
 		contratRepoistory.save(contratManagedEntity);
+		logger.info("save : " + contratManagedEntity);
 
 	}
 
 	public String getEmployePrenomById(int employeId) {
-		Employe employeManagedEntity = employeRepository.findById(employeId).get();
-		return employeManagedEntity.getPrenom();
+		logger.debug("lancement  de la methode getEmployePrenomById ");
+		Employe employeManagedEntity = null;
+		String nom=null;
+		try {
+		Optional<Employe> employeOP=employeRepository.findById(employeId);
+		if(employeOP.isPresent()) {
+			employeManagedEntity = employeOP.get();
+		
+       nom =employeManagedEntity.getPrenom();
+       
+		}
+		logger.info("employe: "+ employeOP);
+		}
+		
+		catch(Exception e) {
+			logger.error(e);
+		}
+		return nom;
+		
 	}
 	 
 	public void deleteEmployeById(int employeId)
-	{
-		Employe employe = employeRepository.findById(employeId).get();
+	
+	{ 
+		logger.debug("lancement  de la methode deleteEmployeById ");	
+		Employe emp = null;
+	Optional<Employe> employeOP=employeRepository.findById(employeId);
+	if(employeOP.isPresent()) {
+		emp = employeOP.get();
+	
 
-		//Desaffecter l'employe de tous les departements
-		//c'est le bout master qui permet de mettre a jour
-		//la table d'association
-		for(Departement dep : employe.getDepartements()){
-			dep.getEmployes().remove(employe);
+		for(Departement dep : emp.getDepartements()){
+			dep.getEmployes().remove(emp);
 		}
-
-		employeRepository.delete(employe);
+	}
+		employeRepository.delete(emp);
+		logger.info("methode termine ");
 	}
 
 	public void deleteContratById(int contratId) {
-		Contrat contratManagedEntity = contratRepoistory.findById(contratId).get();
+		logger.debug("lancement  de la methode deleteContratById ");	
+		Contrat contratManagedEntity = null;
+		Optional<Contrat> contratOp=contratRepoistory.findById(contratId);
+		if(contratOp.isPresent()) {
+			contratManagedEntity = contratOp.get();
+		}
+		
 		contratRepoistory.delete(contratManagedEntity);
+		logger.info("contrat suprime ");
 
 	}
 
 	public int getNombreEmployeJPQL() {
-		return employeRepository.countemp();
+		logger.debug("lancement  de la methode getNombreEmployeJPQL ");
+		int employeJPQL =employeRepository.countemp();
+		logger.info("les employers sont : " + employeJPQL);
+		return employeJPQL;
+		
 	}
+	
 
 	public List<String> getAllEmployeNamesJPQL() {
-		return employeRepository.employeNames();
+		logger.debug("lancement  de la methode getAllEmployeNamesJPQL ");
+		List<String> EmployeJPQL = employeRepository.employeNames();
+		logger.info("le salair est " + EmployeJPQL);
+		return EmployeJPQL;
 
 	}
 
 	public List<Employe> getAllEmployeByEntreprise(Entreprise entreprise) {
-		return employeRepository.getAllEmployeByEntreprisec(entreprise);
+		logger.debug("lancement  de la methode getAllEmployeByEntreprise ");
+		List<Employe> EmployeJPQL =employeRepository.getAllEmployeByEntreprisec(entreprise);
+		logger.info("le salair est" +  EmployeJPQL);
+		return EmployeJPQL;
+		
 	}
 
 	public void mettreAjourEmailByEmployeIdJPQL(String email, int employeId) {
+		logger.debug("lancement  de la methode mettreAjourEmailByEmployeIdJPQL ");
+		try {
 		employeRepository.mettreAjourEmailByEmployeIdJPQL(email, employeId);
+		logger.info("suprimé avec succes");
+		} catch (Exception e) {
+			logger.error("il y a un probleme" + e);
+
+		}
+
+	}
+////////////////////////////////////////////////////////////////
+	public void deleteAllContratJPQL() {
+		logger.debug("lancement  de la methode deleteAllContratJPQL ");
+		try {
+			employeRepository.deleteAllContratJPQL();
+			logger.info("suprimé avec succes");
+		} catch (Exception e) {
+			logger.error("il y a un probleme" + e);
+
+		}
 
 	}
 
-	
-//////////////////////////////////////////////////////////khedmett seiff//////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-public void deleteAllContratJPQL() {
-logger.debug("lancement  de la methode deleteAllContratJPQL ");
-try {
-employeRepository.deleteAllContratJPQL();
-logger.info("suprimé avec succes");
-}
-catch (Exception e) {
-logger.error("il y a un probleme"+e);
+	public float getSalaireByEmployeIdJPQL(int employeId) {
+		logger.debug("lancement  de la methode getSalaireByEmployeIdJPQL ");
+		float varia = employeRepository.getSalaireByEmployeIdJPQL(employeId);
+		logger.info("le salire est : " + varia);
+		return varia;
+	}
 
-}
+	public Double getSalaireMoyenByDepartementId(int departementId) {
+		logger.debug("lancement  de la methode getSalaireMoyenByDepartementId ");
+		Double variable = employeRepository.getSalaireMoyenByDepartementId(departementId);
+		logger.info("le salire est : " + variable);
+		return variable;
+	}
 
-}
+	public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, Date dateDebut,
+			Date dateFin) {
+		logger.debug("lancement  de la methode getTimesheetsByMissionAndDate ");
 
+		List<Timesheet> timesheets = timesheetRepository.getTimesheetsByMissionAndDate(employe, mission, dateDebut,
+				dateFin);
 
+		logger.info("les donnés sont : " + timesheets);
+		return timesheets;
 
+	}
 
+	public List<Employe> getAllEmployes() {
 
-public float getSalaireByEmployeIdJPQL(int employeId) {
-logger.debug("lancement  de la methode getSalaireByEmployeIdJPQL ");
-float varia=employeRepository.getSalaireByEmployeIdJPQL(employeId);
-logger.info("le salire est : "+varia);
-return varia;
-}
+		logger.debug("lancement  de la methode get employé ");
+		List<Employe> employes = employeRepository.findAll();
+		logger.info("les employer sont : " + employes);
+		return employes;
+	}
 
-
-
-
-public Double getSalaireMoyenByDepartementId(int departementId) {
-logger.debug("lancement  de la methode getSalaireMoyenByDepartementId ");
-Double variable= employeRepository.getSalaireMoyenByDepartementId(departementId);
-logger.info("le salire est : "+variable);
-return variable ;
-}
-
-
+	@Override
+	public Employe authenticate(String login, String password) {
 
 
 
-public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, Date dateDebut,Date dateFin) {
-logger.debug("lancement  de la methode getTimesheetsByMissionAndDate ");
 
-List<Timesheet> timesheets= timesheetRepository.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin);
-
-logger.info("les donnés sont : "+timesheets);
-return  timesheets;
-
-}
+		return employeRepository.findByEmail(login);
 
 
-public List<Employe> getAllEmployes() {
 
-logger.debug("lancement  de la methode get employé ");
-List<Employe> employes= (List<Employe>) employeRepository.findAll();
-logger.info("les employer sont : "+ employes);
-return employes;
-}
-
+	}
 
 }
