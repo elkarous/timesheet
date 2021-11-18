@@ -137,6 +137,7 @@
 		</dependency>
 		<!-- JSF -->
 	</dependencies>
+
 	<build>
 		<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
 		<plugins>
@@ -186,6 +187,7 @@
 		</plugins>
 	</build>
 <distributionManagement>
+
 		<snapshotRepository>
 			<id>nexus-snapshots</id>
 			<url>http://localhost:8081/repository/maven-snapshots/</url>
@@ -196,3 +198,4 @@
 		</repository>
 	</distributionManagement>
 </project>
+
