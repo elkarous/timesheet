@@ -2,6 +2,7 @@ package tn.esprit.spring.controller;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import tn.esprit.spring.dto.DepartementDto;
+import tn.esprit.spring.dto.EntrepriseDto;
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.services.IEmployeService;
@@ -29,14 +32,15 @@ public class RestControlEntreprise {
 	@Autowired
 	ITimesheetService itimesheetservice;
 	
-	// Ajouter Entreprise : http://localhost:8081/SpringMVC/servlet/ajouterEntreprise
-	//{"id":1,"name":"SSII Consulting","raisonSocial":"Cite El Ghazela"}
+	// http://localhost:8081/SpringMVC/servlet/ajouterEntreprise
 
 	@PostMapping("/ajouterEntreprise")
 	@ResponseBody
-	public int ajouterEntreprise(@RequestBody Entreprise ssiiConsulting) {
-		ientrepriseservice.ajouterEntreprise(ssiiConsulting);
-		return ssiiConsulting.getId();
+	public int ajouterEntreprise(@RequestBody EntrepriseDto ssiiConsulting) {
+		 ModelMapper modelMapper = new ModelMapper();
+		 Entreprise entreprise = modelMapper.map(ssiiConsulting, Entreprise.class);
+		ientrepriseservice.ajouterEntreprise(entreprise);
+		return entreprise.getId();
 	}
 	
 	// http://localhost:8081/SpringMVC/servlet/affecterDepartementAEntreprise/1/1
@@ -62,12 +66,13 @@ public class RestControlEntreprise {
 	}
     
     // http://localhost:8081/SpringMVC/servlet/ajouterDepartement
- 	//{"id":1,"name":"Telecom"}
 
  	@PostMapping("/ajouterDepartement")
  	@ResponseBody
-	public int ajouterDepartement(@RequestBody Departement dep) {
-		return ientrepriseservice.ajouterDepartement(dep);
+	public int ajouterDepartement(@RequestBody DepartementDto dep) {
+ 		 ModelMapper modelMapper = new ModelMapper();
+ 		Departement departement = modelMapper.map(dep, Departement.class);
+		return ientrepriseservice.ajouterDepartement(departement);
 	}
 	
  	 // http://localhost:8081/SpringMVC/servlet/getAllDepartementsNamesByEntreprise/1

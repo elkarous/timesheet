@@ -6,20 +6,17 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-import org.apache.log4j.Logger;
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-
 import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.entities.Mission;
 import tn.esprit.spring.entities.Role;
 import tn.esprit.spring.entities.Timesheet;
-import tn.esprit.spring.services.EntrepriseServiceImpl;
 import tn.esprit.spring.services.IEmployeService;
 
 
@@ -28,14 +25,15 @@ import tn.esprit.spring.services.IEmployeService;
 @ELBeanName(value = "employeController")
 @Join(path = "/", to = "/login.jsf")
 public class ControllerEmployeImpl  {
-	private static final Logger logger = Logger.getLogger(ControllerEmployeImpl.class);
+	
+	static final String REDIRECT = "/login.xhtml?faces-redirect=true";
+
 	@Autowired
 	IEmployeService employeService;
 
 	private String login; 
 	private String password; 
 	private Boolean loggedIn;
-
 	private Employe authenticatedUser = null; 
 	private String prenom; 
 	private String nom; 
@@ -43,57 +41,47 @@ public class ControllerEmployeImpl  {
 	private boolean actif;
 	private Role role;  
 	public Role[] getRoles() { return Role.values(); }
-
 	private List<Employe> employes; 
-
 	private Integer employeIdToBeUpdated; // getter et setter
 
 
 	public String doLogin() {
-		
 		String navigateTo = "null";
 		authenticatedUser=employeService.authenticate(login, password);
 		if (authenticatedUser != null && authenticatedUser.getRole() == Role.ADMINISTRATEUR) {
 			navigateTo = "/pages/admin/welcome.xhtml?faces-redirect=true";
 			loggedIn = true;
-			logger.info(authenticatedUser.getNom() +" authentifié ");
 		}		
 
-		else
-		{
-			
+		else{
 			FacesMessage facesMessage =
 					new FacesMessage("Login Failed: Please check your username/password and try again.");
 			FacesContext.getCurrentInstance().addMessage("form:btn",facesMessage);
-			logger.error("username ou/et password incorrecte ");
-		}
-		return navigateTo;	
+
+
+		} return navigateTo;	
+
 	}
 
 	public String doLogout()
 	{
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-	logger.info("log out terminé ");
-	return "/login.xhtml?faces-redirect=true";
+	
+	return REDIRECT;
 	}
 
 
 	public String addEmploye() {
-		logger.debug("debut de la méthode addemployé");
 
-		if (authenticatedUser==null || !loggedIn) {
-			logger.info("authentification obligatoire");
-			return "/login.xhtml?faces-redirect=true";
-		}
+		if (authenticatedUser==null || !loggedIn) return REDIRECT;
 
-		employeService.addOrUpdateEmploye(new Employe(nom, prenom, email, password, actif, role));
-		logger.info("employé ajouté avec succés ");
+		employeService.addOrUpdateEmploye(new Employe(nom, prenom, email, password, actif, role)); 
 		return "null"; 
 	}  
 
 	public String removeEmploye(int employeId) {
 		String navigateTo = "null";
-		if (authenticatedUser==null || !loggedIn) return "/login.xhtml?faces-redirect=true";
+		if (authenticatedUser==null || !loggedIn) return REDIRECT;
 
 		employeService.deleteEmployeById(employeId);
 		return navigateTo; 
@@ -102,7 +90,7 @@ public class ControllerEmployeImpl  {
 	public String displayEmploye(Employe empl) 
 	{
 		String navigateTo = "null";
-		if (authenticatedUser==null || !loggedIn) return "/login.xhtml?faces-redirect=true";
+		if (authenticatedUser==null || !loggedIn) return REDIRECT;
 
 
 		this.setPrenom(empl.getPrenom());
@@ -121,7 +109,7 @@ public class ControllerEmployeImpl  {
 	{ 
 		String navigateTo = "null";
 		
-		if (authenticatedUser==null || !loggedIn) return "/login.xhtml?faces-redirect=true";
+		if (authenticatedUser==null || !loggedIn) return REDIRECT;
 
 		employeService.addOrUpdateEmploye(new Employe(employeIdToBeUpdated, nom, prenom, email, password, actif, role)); 
 

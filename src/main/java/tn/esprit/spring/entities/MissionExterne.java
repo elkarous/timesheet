@@ -9,8 +9,6 @@ public class MissionExterne extends Mission {
 	
 	
 	private String emailFacturation;
-	
-	
 	private float tauxJournalierMoyen;
 
 	
